@@ -1,0 +1,18 @@
+ul {
+    background-color: #333;
+    list-style-type: none;
+    margin: 10px;
+    padding: 20px;
+    width: 100%;
+}
+
+li {
+    display: inline;
+    margin: 10px;
+    padding: 20px;
+    color: white;
+}
+
+li:hover {
+    background-color: #04AA6D;
+}

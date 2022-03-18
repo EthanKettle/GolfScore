@@ -30,7 +30,7 @@ function printCourse(courses) {
   courses.forEach(course => console.log(course))
   let courseOptionsHtml = '';
   courses.forEach((course) => {
-    courseOptionsHtml += `<option value="${course.id}" onselect="myFunction(${course.id})">${course.name}</option>`;
+    courseOptionsHtml += `<li value="${course.id}" onselect="myFunction(${course.id})">${course.name}</li>`;
   });
   document.getElementById('course-select').innerHTML = courseOptionsHtml; 
 }
@@ -41,7 +41,7 @@ function printTable(holes) {
   teeBoxes.forEach((holes) => {
     tableHTML += `<td id="${holes.courseHoleId}">${holes.name}</td>`
   });
-  tableHTML = '</tr>'
+  tableHTML += '</tr>'
   document.getElementById('table-responsive').innerHTML = tableHTML;
 }
 
