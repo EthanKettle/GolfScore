@@ -32,7 +32,7 @@ function printCourse(courses) {
   courses.forEach(course => console.log(course))
   let courseOptionsHtml = '';
   courses.forEach((course) => {
-    courseOptionsHtml += `<li id="${course.id}" data-toggle="modal" data-target="#changable">${course.name}</li>`;
+    courseOptionsHtml += `<li id="${course.id}" onclick="document.getElementById('change').style.display='block'">${course.name}</li>`;
   });
   document.getElementById('course-select').innerHTML = courseOptionsHtml; 
 }
