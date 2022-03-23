@@ -18,16 +18,13 @@ function getAvailableCourses() {
   })
 };
 
-function getHoles(id) {
+function getHoles(id, h, n) {
   return fetch(`https://golf-courses-api.herokuapp.com/courses/${id}`)
   .then(response => response.json())
 
   .then(data => {
-    myHoles = data.holes; 
-    printTable(myHoles)
-    printYards(myHoles)
-    printHandicap(myHoles)
-    printPar(myHoles)
+    myHoles = data.data.holes; 
+    printTable(myHoles, h, n)
   })
 };
 
@@ -35,12 +32,13 @@ function printCourse(courses) {
   courses.forEach(course => console.log(course))
   let courseOptionsHtml = '';
   courses.forEach((course) => {
-    courseOptionsHtml += `<li id="${course.id}" onclick="getHoles(${course.id})">${course.name}</li>`;
+    courseOptionsHtml += `<li id="${course.id}" data-toggle="modal" data-target="#changable">${course.name}</li>`;
   });
   document.getElementById('course-select').innerHTML = courseOptionsHtml; 
 }
 
 function printTable(holes) {
+  console.log(holes, "printTable")
   let tableHTML = ''
   tableHTML += '<tr><th>HOLES</th>'
   for (let i = 0; i < 9; i++) {
@@ -51,61 +49,49 @@ function printTable(holes) {
     tableHTML += `<th id="${holes[i].courseHoleId}">${holes[i].hole}}</th>`
   }
   tableHTML += '<th>IN</th><th>TOTAL</th></tr>'
-  document.getElementById('table-responsive').innerHTML = tableHTML;
-}
-
-function printYards(holes) {
-  let tableHTML = ''
-  tableHTML = '<tr><td>YARDS</td>'
+  // yards
+  tableHTML += '<tr><td>YARDS</td>'
   for (let i = 1; i <= 9; i++) {
-    tableHTML += `<td>${i}</td>`
+    tableHTML += `<td>${holes[i].teeBoxes[h].yards}</td>`
   }
   tableHTML += '<td></td>'
   for (let i = 10; i <= 18; i++) {
-    tableHTML += `<td>${i}</td>`
+    tableHTML += `<td>${holes[i].teeBoxes[h].yards}</td>`
   }
   tableHTML += '<td></td><td></td></tr>'
-  document.getElementById('table-responsive').innerHTML = tableHTML;
-}
-
-function printHandicap(holes) {
-  let tableHTML = ''
-  tableHTML = '<tr><td>HANDICAP</td>'
+  // handicap
+  tableHTML += '<tr><td>HANDICAP</td>'
   for (let i = 1; i <= 9; i++) {
-    tableHTML += `<td>$</td>`
+    tableHTML += `<td>${holes[i].teeBoxes[h].teeBoxes[h].hcp}</td>`
   }
   tableHTML += '<td></td>'
   for (let i = 10; i <= 18; i++) {
-    tableHTML += `<td></td>`
+    tableHTML += `<td>${holes[i].teeBoxes[h].teeBoxes[h].hcp}</td>`
   }
   tableHTML += '<td></td><td></td></tr>'
-  document.getElementById('table-responsive').innerHTML = tableHTML;
-}
-
-function printPar(holes) {
-  let tableHTML = ''
-  tableHTML = '<tr><td>PAR</td>'
+  // par
+  tableHTML += '<tr><td>PAR</td>'
   for (let i = 1; i <= 9; i++) {
-    tableHTML += `<td>${i}</td>`
+    tableHTML += `<td>${holes[i].teeBoxes[h].par}</td>`
   }
-  tableHTML += '<td>OUT</td>'
+  tableHTML += '<td></td>'
   for (let i = 10; i <= 18; i++) {
-    tableHTML += `<td>${i}</td>`
+    tableHTML += `<td>${holes[i].teeBoxes[h].par}</td>`
   }
   tableHTML += '<td>IN</td><td>TOTAL</td></tr>'
-  document.getElementById('table-responsive').innerHTML = tableHTML;
-}
-
-function addName(name) {
-  let newRow = `<tr><td>${name}</td>`;
-  for (let i = 1; i <= 9; i++) {
-    newRow += `<td id="${name}${i}"><input type="number"><td>`;
-  };
-  newRow += `<td id="${name}Out"></td>`;
-  for (let i = 10; i <= 18; i++) {
-    newRow += `<td id="${name}${i}"><input type="number"><td>`;
+  // rows
+  for (let i = 0; i < n; i++) {
+    tableHTML = `<tr><td></td>`;
+    for (let j = 0; j < 9; j++) {
+      tableHTML+= `<td id="${j}${i}"><input type="number"><td>`;
+    };
+    tableHTML+= `<td id="${j}Out"></td>`;
+    for (let j = 9; j < 18; j++) {
+      tableHTML += `<td id="${j}${i}"><input type="number"><td>`;
+    }
+    tableHTML += `<td id="${j}In"></td><td id="${j}Total"></td></tr>`
   }
-  newRow += `<td id="${name}In"></td><td id="${name}Total"></td></tr>`;
+  document.getElementsByClassName('table-responsive').innerHTML = tableHTML;
 }
 
 function addAll(num) {

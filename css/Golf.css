@@ -16,3 +16,7 @@ li {
 li:hover {
     background-color: #04AA6D;
 }
+
+.wide {
+    width: 100%;
+}
