@@ -1,13 +1,3 @@
-class Player {
-  constructor(name, id, scores = []) {
-    this.name = name;
-    this.id = id;
-    this.scores = scores;
-  }
-}
-
-let players = [];
-
 function getAvailableCourses() {
   return fetch('https://golf-courses-api.herokuapp.com/courses')
   .then(response => response.json())
@@ -32,12 +22,12 @@ function printCourse(courses) {
   courses.forEach(course => console.log(course))
   let courseOptionsHtml = '';
   courses.forEach((course) => {
-    courseOptionsHtml += `<li id="${course.id}" onclick="document.getElementById('change').style.display='block'">${course.name}</li>`;
+    courseOptionsHtml += `<li id="${course.id}" onclick="document.getElementById('change').style.display='block'; document.getElementById('courseHolder').textContent='${course.id}'">${course.name}</li>`;
   });
   document.getElementById('course-select').innerHTML = courseOptionsHtml; 
 }
 
-function printTable(holes) {
+function printTable(holes, h, n) {
   console.log(holes, "printTable")
   let tableHTML = ''
   tableHTML += '<tr><th>HOLES</th>'

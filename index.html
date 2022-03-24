@@ -10,7 +10,6 @@
         <div class="row">
             <div class="col-lg-12" id="header"></div>
         </div>
-        <button onclick="document.getElementById('id01').style.display='block'" class="w3-button">Open Modal</button>
         <div class="row">
             <!-- course selection -->
             <div class="wide">
@@ -27,10 +26,11 @@
             </div>
         </div>
     </div>
-    <div id="change">
-        <div>
+    <div id="change" class="modal">
+        <div class="mContent">
             <div>
-                <span onclick="document.getElementById('change').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                <span onclick="document.getElementById('change').style.display='none'">&times;</span>
+                <p id="courseHolder" style="display: none;"></p>
                 <select id="Handicap">
                     <option value="3">Men's</option>
                     <option value="4">Women's</option>
@@ -44,22 +44,12 @@
                     <option value="4">4</option>
                 </select>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" onclick="document.getElementById('change').style.display='none'; getHoles(
+                    document.getElementById('courseHolder').textContent, 
+                    document.getElementById('Handicap').value, 
+                    document.getElementById('playerNum').value)">Create Course</button>
+              </div>
         </div>
     </div>
-    <!-- <div id="change" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Modal Header</h4>
-            </div>
-            <div class="modal-body">
-                
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div> -->
 </body>
