@@ -41,31 +41,32 @@ function printTable(holes, h, n) {
   tableHTML += '<th>IN</th><th>TOTAL</th></tr>'
   // yards
   tableHTML += '<tr><td>YARDS</td>'
-  for (let i = 1; i <= 9; i++) {
+  for (let i = 0; i < 9; i++) {
+    // console.log(holes[i].teeBoxes[h].yards)
     tableHTML += `<td>${holes[i].teeBoxes[h].yards}</td>`
   }
   tableHTML += '<td></td>'
-  for (let i = 10; i <= 18; i++) {
+  for (let i = 9; i < 18; i++) {
     tableHTML += `<td>${holes[i].teeBoxes[h].yards}</td>`
   }
   tableHTML += '<td></td><td></td></tr>'
   // handicap
   tableHTML += '<tr><td>HANDICAP</td>'
-  for (let i = 1; i <= 9; i++) {
-    tableHTML += `<td>${holes[i].teeBoxes[h].teeBoxes[h].hcp}</td>`
+  for (let i = 0; i < 9; i++) {
+    tableHTML += `<td>${holes[i].teeBoxes[h].hcp}</td>`
   }
   tableHTML += '<td></td>'
-  for (let i = 10; i <= 18; i++) {
-    tableHTML += `<td>${holes[i].teeBoxes[h].teeBoxes[h].hcp}</td>`
+  for (let i = 9; i < 18; i++) {
+    tableHTML += `<td>${holes[i].teeBoxes[h].hcp}</td>`
   }
   tableHTML += '<td></td><td></td></tr>'
   // par
   tableHTML += '<tr><td>PAR</td>'
-  for (let i = 1; i <= 9; i++) {
+  for (let i = 0; i < 9; i++) {
     tableHTML += `<td>${holes[i].teeBoxes[h].par}</td>`
   }
   tableHTML += '<td></td>'
-  for (let i = 10; i <= 18; i++) {
+  for (let i = 9; i < 18; i++) {
     tableHTML += `<td>${holes[i].teeBoxes[h].par}</td>`
   }
   tableHTML += '<td>IN</td><td>TOTAL</td></tr>'
@@ -73,15 +74,16 @@ function printTable(holes, h, n) {
   for (let i = 0; i < n; i++) {
     tableHTML = `<tr><td></td>`;
     for (let j = 0; j < 9; j++) {
-      tableHTML+= `<td id="${j}${i}"><input type="number"><td>`;
+      tableHTML+= `<td id="${j}-${i}"><input type="number"><td>`;
     };
-    tableHTML+= `<td id="${j}Out"></td>`;
+    tableHTML+= `<td id="${i}-Out"></td>`;
     for (let j = 9; j < 18; j++) {
-      tableHTML += `<td id="${j}${i}"><input type="number"><td>`;
+      tableHTML += `<td id="${j}-${i}"><input type="number"><td>`;
     }
-    tableHTML += `<td id="${j}In"></td><td id="${j}Total"></td></tr>`
+    tableHTML += `<td id="${i}-In"></td><td id="${i}-Total"></td>`
   }
-  document.getElementsByClassName('table-responsive').innerHTML = tableHTML;
+  tableHTML += `</tr>`
+  document.getElementById('tableGolf').innerHTML = tableHTML;
 }
 
 function addAll(num) {
