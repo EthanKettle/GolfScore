@@ -30,7 +30,7 @@ function printCourse(courses) {
 function printTable(holes, h, n) {
   console.log(holes, "printTable")
   let tableHTML = ''
-  tableHTML += '<tr><th>HOLES</th>'
+  tableHTML += '<thead><tr><th>HOLES</th>'
   for (let i = 0; i < 9; i++) {
     tableHTML += `<th id="${holes[i].courseHoleId}">${holes[i].hole}</th>`
   }
@@ -38,9 +38,9 @@ function printTable(holes, h, n) {
   for (let i = 9; i < 18; i++) {
     tableHTML += `<th id="${holes[i].courseHoleId}">${holes[i].hole}}</th>`
   }
-  tableHTML += '<th>IN</th><th>TOTAL</th></tr>'
+  tableHTML += '<th>IN</th><th>TOTAL</th></tr></thead>'
   // yards
-  tableHTML += '<tr><td>YARDS</td>'
+  tableHTML += '<tbody><tr><td>YARDS</td>'
   for (let i = 0; i < 9; i++) {
     // console.log(holes[i].teeBoxes[h].yards)
     tableHTML += `<td>${holes[i].teeBoxes[h].yards}</td>`
@@ -72,7 +72,7 @@ function printTable(holes, h, n) {
   tableHTML += '<td>IN</td><td>TOTAL</td></tr>'
   // rows
   for (let i = 0; i < n; i++) {
-    tableHTML = `<tr><td></td>`;
+    tableHTML += `<tr><td></td>`;
     for (let j = 0; j < 9; j++) {
       tableHTML+= `<td id="${j}-${i}"><input type="number"><td>`;
     };
@@ -82,7 +82,7 @@ function printTable(holes, h, n) {
     }
     tableHTML += `<td id="${i}-In"></td><td id="${i}-Total"></td>`
   }
-  tableHTML += `</tr>`
+  tableHTML += `</tr><tbody>`
   document.getElementById('tableGolf').innerHTML = tableHTML;
 }
 
