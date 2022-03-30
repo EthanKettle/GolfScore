@@ -36,7 +36,7 @@ function printTable(holes, h, n) {
   }
   tableHTML += '<th>OUT</th>'
   for (let i = 9; i < 18; i++) {
-    tableHTML += `<th id="${holes[i].courseHoleId}">${holes[i].hole}}</th>`
+    tableHTML += `<th id="${holes[i].courseHoleId}">${holes[i].hole}</th>`
   }
   tableHTML += '<th>IN</th><th>TOTAL</th></tr></thead>'
   // yards
@@ -72,39 +72,39 @@ function printTable(holes, h, n) {
   tableHTML += '<td>IN</td><td>TOTAL</td></tr>'
   // rows
   for (let i = 0; i < n; i++) {
-    tableHTML += `<tr><td></td>`;
+    tableHTML += `<tr><td><input></td>`;
     for (let j = 0; j < 9; j++) {
-      tableHTML+= `<td id="${j}-${i}"><input type="number"><td>`;
+      tableHTML+= `<td  onclick="addAll(${i}), addOut(${i})"><input id="${i}-${j}" type="number"></td>`;
     };
     tableHTML+= `<td id="${i}-Out"></td>`;
     for (let j = 9; j < 18; j++) {
-      tableHTML += `<td id="${j}-${i}"><input type="number"><td>`;
+      tableHTML += `<td onclick="addAll(${i}), addIn(${i})"><input id="${i}-${j}"  type="number"></td>`;
     }
     tableHTML += `<td id="${i}-In"></td><td id="${i}-Total"></td>`
   }
-  tableHTML += `</tr><tbody>`
+  tableHTML += `</tr></tbody>`
   document.getElementById('tableGolf').innerHTML = tableHTML;
 }
 
 function addAll(num) {
   let total = 0;
-  for (let i = 0; i < num.length; i++) {
-    total += num[i];
+  for (let i = 0; i < 18; i++) {
+    total += +document.getElementById(num + "-" + i).value;
   }
-  return total;
+  document.getElementById(num + "-Total").innerText = total;
 }
 function addOut(num) {
   let total = 0;
   for (let i = 0; i < 9; i++) {
-    total += num[i];
+    total += +document.getElementById(num + "-" + i).value;
   }
-  return total;
+  document.getElementById(num + "-Out").innerText = total;
 }
 
 function addIn(num) {
   let total = 0;
   for (let i = 9; i < 18; i++) {
-    total += num[i];
+    total += +document.getElementById(num + "-" + i).value;
   }
-  return total;
+  document.getElementById(num + "-In").innerText = total;
 }  
